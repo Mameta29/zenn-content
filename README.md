@@ -17,3 +17,20 @@ docker compose exec zenn sh
 ```sh
 docker compose down
 ```
+
+## znn コマンド
+**記事作成**
+
+```sh
+npx zenn new:article
+```
+
+**記事のプレビュー**
+
+```sh
+npx zenn preview
+```
+
+## 記事一覧
+- TikTokがゼロ知識証明(ZKP)を用いたOSSを公開した話
+d05f0c9d9dff90
