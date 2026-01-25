@@ -30,7 +30,3 @@ npx zenn new:article
 ```sh
 npx zenn preview
 ```
-
-## 記事一覧
-- TikTokがゼロ知識証明(ZKP)を用いたOSSを公開した話
-d05f0c9d9dff90
