@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" viewBox="0 0 680 420" role="img" font-family="system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif">
+<title>Worker/Node 二刀流のアーキテクチャ</title>
+<desc>共通の facilitator コアを SettleRunner インターフェースで抽象化し、apps/server (Node) と apps/worker (Cloudflare Workers) という 2 つの殻に包む。</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#73726c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<style>
+.box-purple{fill:#EEEDFE;stroke:#534AB7;}
+.box-teal{fill:#E1F5EE;stroke:#0F6E56;}
+.box-coral{fill:#FAECE7;stroke:#993C1D;}
+.th{font-size:14px;font-weight:500;}
+.ts{font-size:12px;}
+.t-purple-h{fill:#3C3489;}
+.t-purple-s{fill:#534AB7;}
+.t-teal-h{fill:#085041;}
+.t-teal-s{fill:#0F6E56;}
+.t-coral-h{fill:#712B13;}
+.t-coral-s{fill:#993C1D;}
+.muted{fill:#73726c;font-size:12px;}
+.arr{fill:none;stroke:#73726c;stroke-width:1.5;}
+</style>
+</defs>
+
+<rect x="190" y="30" width="300" height="56" rx="8" class="box-purple" stroke-width="0.5"/>
+<text class="th t-purple-h" x="340" y="48" text-anchor="middle" dominant-baseline="central">@jpyc-x402/facilitator（コア）</text>
+<text class="ts t-purple-s" x="340" y="68" text-anchor="middle" dominant-baseline="central">Hono / verify, settle, supported</text>
+
+<text class="muted" x="340" y="110" text-anchor="middle">SettleRunner インターフェースで並行処理を抽象化</text>
+
+<line x1="340" y1="86" x2="340" y2="125" class="arr"/>
+<path d="M 170 125 L 510 125" class="arr"/>
+<path d="M 170 125 L 170 150" class="arr" marker-end="url(#arrow)"/>
+<path d="M 510 125 L 510 150" class="arr" marker-end="url(#arrow)"/>
+
+<rect x="60" y="150" width="220" height="56" rx="8" class="box-teal" stroke-width="0.5"/>
+<text class="th t-teal-h" x="170" y="168" text-anchor="middle" dominant-baseline="central">apps/server</text>
+<text class="ts t-teal-s" x="170" y="188" text-anchor="middle" dominant-baseline="central">Node + Hono (Render / Fly / VPS)</text>
+
+<line x1="170" y1="206" x2="170" y2="230" class="arr" marker-end="url(#arrow)"/>
+<rect x="60" y="230" width="220" height="44" rx="8" class="box-teal" stroke-width="0.5"/>
+<text class="th t-teal-h" x="170" y="252" text-anchor="middle" dominant-baseline="central">InProcessSettleRunner</text>
+
+<line x1="170" y1="274" x2="170" y2="298" class="arr" marker-end="url(#arrow)"/>
+<rect x="60" y="298" width="220" height="56" rx="8" class="box-teal" stroke-width="0.5"/>
+<text class="th t-teal-h" x="170" y="316" text-anchor="middle" dominant-baseline="central">per-chain Mutex</text>
+<text class="ts t-teal-s" x="170" y="336" text-anchor="middle" dominant-baseline="central">Map&lt;chainId, Promise&gt;</text>
+
+<text class="muted" x="170" y="385" text-anchor="middle">プレーン Docker — ロックインなし</text>
+
+<rect x="400" y="150" width="220" height="56" rx="8" class="box-coral" stroke-width="0.5"/>
+<text class="th t-coral-h" x="510" y="168" text-anchor="middle" dominant-baseline="central">apps/worker</text>
+<text class="ts t-coral-s" x="510" y="188" text-anchor="middle" dominant-baseline="central">Cloudflare Workers + DO</text>
+
+<line x1="510" y1="206" x2="510" y2="230" class="arr" marker-end="url(#arrow)"/>
+<rect x="400" y="230" width="220" height="44" rx="8" class="box-coral" stroke-width="0.5"/>
+<text class="th t-coral-h" x="510" y="252" text-anchor="middle" dominant-baseline="central">WorkerSettleRunner</text>
+
+<line x1="510" y1="274" x2="510" y2="298" class="arr" marker-end="url(#arrow)"/>
+<rect x="400" y="298" width="220" height="56" rx="8" class="box-coral" stroke-width="0.5"/>
+<text class="th t-coral-h" x="510" y="316" text-anchor="middle" dominant-baseline="central">RelayerSignerDO</text>
+<text class="ts t-coral-s" x="510" y="336" text-anchor="middle" dominant-baseline="central">blockConcurrencyWhile</text>
+
+<text class="muted" x="510" y="385" text-anchor="middle">本番推奨 — エッジで月 $5</text>
+</svg>
