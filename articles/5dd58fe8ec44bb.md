@@ -1,5 +1,5 @@
 ---
-title: "ECショップを x402 に完全移行した話 ── EC 編"
+title: "ECショップをAI決済対応した話 (JPYC・x402) ── EC 編"
 emoji: "📌"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["x402", "jpyc", "blockchain", "ai", "ec"]
