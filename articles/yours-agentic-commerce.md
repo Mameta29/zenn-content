@@ -16,6 +16,9 @@ AIに「条件に合う商品を探して、そのまま買っておいて」と
 
 この記事では、[第5回 Agentic AI Hackathon with Google Cloud](https://zenn.dev/hackathons/google-cloud-japan-ai-hackathon-vol5)に向けて開発したyoursを、実際にできることと、その権限をどう守っているかに分けて紹介します。AIエージェントへ決済機能を組み込みたい方や、AIに資産を任せる設計に関心がある方に、具体的な実装イメージを持ってもらえればと思います！
 
+![yoursの製品コンセプト。買い物はAIに、決定権は本人に残す](/images/yours-agentic-commerce/project-cover.png)
+*任せる範囲を本人が決め、条件内はAIが購入する。LINE連携を含む、目指す購入体験を図にしたものです。*
+
 - [公開アプリを試す](https://yours-api-110852561536.asia-northeast1.run.app) — 商品検索はウォレット接続なしで利用できます。
 - [GitHub](https://github.com/Mameta29/yours) / [試用ガイド](https://github.com/Mameta29/yours/blob/main/docs/TRY-IT.md)
 - [公開テストネットで成立した購入の記録](https://github.com/Mameta29/yours/blob/16b69535f420fce8ee34b5b14c7c8199d7c0bece/docs/evidence/public-owner-purchase.json)
@@ -38,6 +41,9 @@ yoursは、AIへ任せる範囲と、実際に使われた金額を確認する�
 
 LINE連携では、最初に本人が任せる範囲を決め、その条件内の購入をAIが進める流れを目指しています。
 
+![事前同意からLINEでの購入依頼、条件内の購入、LINE Loginと注文同意による一件承認までのフロー](/images/yours-agentic-commerce/permission-flow.png)
+*条件内の購入と、条件外の一件承認を分けた設計。追加開発しているLINE連携のフローです。*
+
 1. 自分のウォレットとLINEアカウントを結び付け、購入を任せるAIを追加する。
 2. 店舗、購入を任せる商品の範囲、1回の上限、24時間ごとの予算、有効期限を確認し、条件内の購入を任せることにウォレットで同意する。
 3. LINEで「お米10kgを買っておいて」と依頼すると、Geminiが商品・価格・在庫を調べる。
@@ -50,8 +56,8 @@ LINE連携では、最初に本人が任せる範囲を決め、その条件内�
 
 公開中の版では、ウォレットを接続してAIの支出条件を登録し、**商品・数量・金額を確認して注文ごとに署名します**。その後の会計と支払いをGeminiが進め、条件を超える場合は本人へ追加確認を戻します。上記のLINE連携は、公開環境での接続と通し検証が残っています。
 
-![yoursの公開画面。Geminiによる商品検索と、予算・権限を確認する領域](/images/yours-agentic-commerce/workspace.png)
-*公開環境でGeminiが実カタログを検索した画面。未接続時は検索のみ利用できます。在庫表示は撮影時点のものです。*
+![公開Geminiがお米の価格と在庫を比較した画面と、別途確認したyours Marketの購入実績](/images/yours-agentic-commerce/live-product-search.png)
+*左は2026年10月15日の公開検索画面。右下の300 test JPYC購入は、yours Marketの別商品の検証結果です。価格・在庫は撮影時点の値です。*
 
 ### 公開環境で、購入から受け取りまで成立しました
 
@@ -218,8 +224,8 @@ UCPは`2026-08-25`、AP2はv0.2の公式SDKを固定して検証しています�
 
 Google Cloudは、AIの実行に加え、署名権限の分離、状態の永続化、処理中断からの復旧にも使っています。
 
-![yoursの構成。Google Cloud上のAPI・Gemini・AP2・決済workerと、既存EC・Polygon Amoyの接続](/images/yours-agentic-commerce/architecture.png)
-*公開環境で稼働している決済基盤の構成。LINEの受付・認証との接続は追加開発の対象です。*
+![LINEとLINE Login、Google CloudのAPI・Gemini・AP2・決済worker、既存EC、Polygon Amoyをつなぐ全体構成](/images/yours-agentic-commerce/architecture-line.png)
+*LINE連携を含む全体の設計図。API・Gemini・AP2・決済workerなどの決済基盤は公開稼働中で、LINEの受付・認証との接続は追加開発中です。*
 
 | サービス | 役割と選定理由 |
 | --- | --- |
