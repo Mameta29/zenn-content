@@ -1,7 +1,7 @@
 ---
 title: "AIに買い物を任せるのは怖い。使える権限を自分で決める「yours」を作った"
 emoji: "🛒"
-type: "tech"
+type: "idea"
 topics: ["googlecloud", "gemini", "ucp", "blockchain", "aiagent"]
 published: true
 ---
