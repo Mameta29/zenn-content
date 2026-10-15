@@ -3,7 +3,7 @@ title: "AIに買い物を任せるのは怖い。使える権限を自分で決�
 emoji: "🛒"
 type: "tech"
 topics: ["googlecloud", "gemini", "ucp", "blockchain", "aiagent"]
-published: false
+published: true
 ---
 
 ## はじめに
