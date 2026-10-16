@@ -18,10 +18,9 @@ AIに「条件に合う商品を探して、そのまま買っておいて」と
 
 まずは、実際の画面です。**LINEでお米を頼む → 400 JPYCなら購入 → 欠品後の1,200 JPYCは本人へ確認**という流れを録画しました。
 
-[![yoursの管理画面と、LINEで1,200 JPYCの購入が承認待ちになった実画面。クリックするとデモ動画が開きます](/images/yours-agentic-commerce/demo-overview.png)](https://drive.google.com/file/d/1DIhIRqlnPjUqpi2_W4bYiKdJ9DV6pcXR/view)
-*2026年10月16日の実機デモ。画像をクリックするとGoogle Driveで動画を見られます（3分48秒）。*
+https://www.youtube.com/watch?v=LueHN-WynQg
 
-[デモ動画をGoogle Driveで見る](https://drive.google.com/file/d/1DIhIRqlnPjUqpi2_W4bYiKdJ9DV6pcXR/view)
+*2026年10月16日の実機デモ。*
 
 動画の要点は、次の1章でスクリーンショットと一緒に紹介します。
 
